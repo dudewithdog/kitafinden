@@ -5,125 +5,227 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kitaplatz suchen – Das digitale Überlebenshandbuch</title>
     <style>
+        :root {
+            --bg-color: #f5f5f7;
+            --card-bg: #ffffff;
+            --text-main: #1d1d1f;
+            --text-muted: #86868b;
+            --accent: #0066cc;
+            --border-radius: 16px;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f5f5f7;
-            color: #1d1d1f;
-            line-height: 1.5;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+
+        /* Hero Header */
+        .hero {
+            background: linear-gradient(135deg, #1d1d1f 0%, #2d2d30 100%);
+            color: #ffffff;
+            padding: 80px 20px;
+            text-align: center;
         }
-        h1 {
-            font-size: 40px;
+
+        .hero h1 {
+            font-size: 48px;
             font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 10px;
+            letter-spacing: -1px;
+            margin: 0 0 16px 0;
         }
-        .subtitle {
-            font-size: 21px;
-            color: #86868b;
-            margin-bottom: 40px;
+
+        .hero p {
+            font-size: 20px;
+            color: #aeae2;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
         }
-        .card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+        /* Main Content Container */
+        .container {
+            max-width: 1100px;
+            margin: -40px auto 60px auto;
+            padding: 0 20px;
         }
-        h2 {
-            font-size: 24px;
+
+        /* Intro Card spans full width */
+        .intro-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+            margin-bottom: 32px;
+        }
+
+        .intro-card h2 {
+            font-size: 28px;
             margin-top: 0;
-            border-bottom: 1px solid #eeeeee;
-            padding-bottom: 10px;
+            letter-spacing: -0.5px;
         }
-        h3 {
-            font-size: 18px;
-            color: #0066cc;
+
+        /* Grid for Main Topics */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 32px;
         }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+
+        /* Badge Styles */
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .badge-chrono { background: #e8f4ff; color: #0066cc; }
+        .badge-strat { background: #eafaf1; color: #1a7f37; }
+        .badge-tool { background: #f3f3f4; color: #57606a; }
+
+        h2, h3 {
+            letter-spacing: -0.5px;
+        }
+
+        h2 { font-size: 26px; margin-top: 0; }
+        h3 { font-size: 18px; margin-top: 32px; color: var(--accent); }
+
+        /* Tables styled properly */
         table {
             width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 24px 0;
+            border: 1px solid #e5e5e7;
+            border-radius: 8px;
+            overflow: hidden;
         }
+
         th, td {
+            padding: 16px;
             text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #eeeeee;
+            font-size: 14px;
         }
+
         th {
             background-color: #f5f5f7;
             font-weight: 600;
+            border-bottom: 1px solid #e5e5e7;
         }
+
+        td {
+            border-bottom: 1px solid #e5e5e7;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Code Block Styles for Copy-Paste */
         pre {
             background: #f5f5f7;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 10px;
             overflow-x: auto;
-            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-            font-size: 14px;
+            font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+            font-size: 13px;
+            color: #24292f;
+            border: 1px solid #e5e5e7;
+            line-height: 1.5;
         }
-        ul {
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 8px;
+
+        /* Responsive Tweak */
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 36px; }
+            .card { padding: 24px; }
         }
     </style>
 </head>
 <body>
 
+<div class="hero">
+    <h1>Kitaplatz suchen</h1>
+    <p>Das digitale Überlebenshandbuch zum Buchband „Formulare“</p>
+</div>
+
 <div class="container">
 
-    <h1>Kitaplatz suchen</h1>
-    <div class="subtitle">Das digitale Überlebenshandbuch zum Buch „Formulare“</div>
-
-    <div class="card">
+    <div class="intro-card">
         <h2>Hier ist die Sache</h2>
-        <p>Ein Kind zu bekommen, ist ein emotionales Abenteuer. Einen Kitaplatz zu bekommen, ist dagegen ein bürokratischer Belastungstest. Wer glaubt, es ginge dabei nur um das Ausfüllen von Name und Adresse, verliert das Spiel, bevor es beginnt. Die Suche nach einem Betreuungsplatz ist strategisches Pokern, verpackt in offizielle Formulare. Dieses Handbuch bricht den Wahnsinn auf.</p>
+        <p style="font-size: 18px; margin: 0; color: #424245;">Ein Kind zu bekommen, ist ein emotionales Abenteuer. Einen Kitaplatz zu bekommen, ist dagegen ein bürokratischer Belastungstest. Wer glaubt, es ginge dabei nur um das Ausfüllen von Name und Adresse, verliert das Spiel, bevor es beginnt. Die Suche nach einem Betreuungsplatz ist strategisches Pokern, verpackt in offizielle Formulare. Dieses Handbuch bricht den Wahnsinn auf.</p>
     </div>
 
-    <div class="card">
-        <h2>1. Die Chronologie des Wahnsinns</h2>
-        <h3>Die Voranmeldung (Gefühlt vor dem positiven Test)</h3>
-        <p>In vielen Städten gilt: Je früher, desto besser. Wenn das Formular zwingend einen Vornamen verlangt, schreiben Sie „Baby“ oder „Kind“ gefolgt von Ihrem Nachnamen. Das lässt sich später problemlos korrigieren.</p>
-        
-        <h3>Das Hauptdokument: Der Betreuungsgutschein</h3>
-        <p>Das wichtigste Formular überhaupt. Hier entscheidet der Staat, ob er sich an den Kosten beteiligt. Das Problem: Viele Arbeitgeber unterschreiben einen Arbeitsvertrag erst, wenn die Betreuung gesichert ist. Das Amt bewilligt den Gutschein aber erst, wenn der Vertrag vorliegt. Was dies wirklich bedeutet, ist: Sie müssen mit Proformaverträgen oder Absichtserklärungen arbeiten.</p>
+    <div class="grid">
+
+        <div class="card">
+            <span class="badge badge-chrono">Chronologie</span>
+            <h2>1. Der zeitliche Ablauf</h2>
+            
+            <h3>Die Voranmeldung (Gefühlt vor dem positiven Test)</h3>
+            <p>In vielen Städten gilt: Je früher, desto besser. Wenn das Formular zwingend einen Vornamen verlangt, schreiben Sie „Baby“ oder „Kind“ gefolgt von Ihrem Nachnamen. Das lässt sich später problemlos korrigieren.</p>
+            
+            <h3>Das Hauptdokument: Der Betreuungsgutschein</h3>
+            <p>Das wichtigste Formular überhaupt. Hier entscheidet der Staat, ob er sich an den Kosten beteiligt. Das Problem: Viele Arbeitgeber unterschreiben einen Arbeitsvertrag erst, wenn die Betreuung gesichert ist. Das Amt bewilligt den Gutschein aber erst, wenn der Vertrag vorliegt. Was dies wirklich bedeutet, ist: Sie müssen mit Proformaverträgen oder Absichtserklärungen arbeiten.</p>
+        </div>
+
+        <div class="card">
+            <span class="badge badge-strat">Strategie</span>
+            <h2>2. Taktisch Ausfüllen</h2>
+            <p>Nutzen Sie das Freitextfeld „Besondere familiäre Situation“ gezielt als Bewerbung, statt dort Standardfloskeln einzutragen.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fehler</th>
+                        <th>Bessere Formulierung</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>„Wir haben keine Grosseltern in der Nähe und wollen einfach mal wieder unsere Ruhe.“</td>
+                        <td>„Es stehen vor Ort keinerlei familiäre oder informelle Betreuungsnetzwerke zur Verfügung. Beide Elternteile sind beruflich voll eingebunden.“</td>
+                    </tr>
+                    <tr>
+                        <td>„Ich fange vielleicht bald wieder an zu arbeiten.“</td>
+                        <td>„Die Wiederaufnahme der Erwerbstätigkeit ist fest auf den [Datum] terminiert. Ein verbindliches Stellenangebot liegt vor.“</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
-    <div class="card">
-        <h2>2. Strategisches Ausfüllen</h2>
-        <p>Nutzen Sie das Freitextfeld „Besondere familiäre Situation“ als Bewerbung.</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Was Sie nicht schreiben sollten</th>
-                    <th>Wie Sie es besser formulieren</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>„Wir haben keine Grosseltern in der Nähe und wollen einfach mal wieder unsere Ruhe haben.“</td>
-                    <td>„Es stehen vor Ort keinerlei familiäre oder informelle Betreuungsnetzwerke zur Verfügung. Beide Elternteile sind beruflich voll eingebunden.“</td>
-                </tr>
-                <tr>
-                    <td>„Ich fange vielleicht bald wieder an zu arbeiten.“</td>
-                    <td>„Die Wiederaufnahme der Erwerbstätigkeit ist fest auf den [Datum] terminiert. Ein verbindliches Stellenangebot liegt vor.“</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="card">
+    <div class="card" style="margin-top: 32px;">
+        <span class="badge badge-tool">Werkzeuge</span>
         <h2>3. Textbausteine zum Kopieren</h2>
+        <p>Kopieren Sie diese Vorlagen direkt heraus, um sie für Ihren Antrag oder die Kommunikation mit dem Arbeitgeber anzupassen.</p>
+        
         <h3>Vorlage: Motivationsschreiben im Antrag</h3>
-        <pre>
-Sehr geehrte Damen und Herren
+        <pre>Sehr geehrte Damen und Herren
 
 Mit diesem Antrag möchten wir unser dringendes Interesse an einem Betreuungsplatz für unser Kind [Name] ab dem [Wunschdatum] bekräftigen. Aufgrund der feststehenden Wiederaufnahme unserer Erwerbstätigkeiten (Mutter: [X]%, Vater: [X]%) und des vollständigen Fehlens lokaler familiärer Unterstützung im Raum [Wohnort], sind wir zwingend auf eine professionelle Betreuung angewiesen.
 
